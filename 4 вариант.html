@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Дизайн‑проект Турбо — 1200 ₽ за м²</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Дизайн‑проект Турбо: дизайн‑проект квартиры за 7–14 дней по цене 1200 ₽ за м². Планировка, эскизы интерьера и базовые чертежи для ремонта." />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f5f5f5;
+      --text-main: #111111;
+      --text-body: #444444;
+      --text-muted: #757575;
+      --border: #cccccc;
+      --accent: #a52a2a;
+      --accent-hover: #8b0000;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --shadow-soft: 0 18px 40px rgba(0,0,0,0.06);
+      --font-sans: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .page { min-height: 100vh; display: flex; flex-direction: column; }
+    .container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(204,204,204,0.7);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .brand { display: flex; align-items: center; gap: 10px; }
+
+    .brand-logo {
+      width: 80px;
+      height: 40px;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000000;
+    }
+
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand-text { display: flex; flex-direction: column; gap: 2px; }
+
+    .brand-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-main);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .brand-tagline {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .header-cta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+    .pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      background: #ffffff;
+    }
+
+    .btn {
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      cursor: pointer;
+      padding: 9px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 20px rgba(165,42,42,0.25);
+      transition: background 0.15s ease-out, border-color 0.15s ease-out,
+                  transform 0.15s ease-out, box-shadow 0.15s ease-out;
+      white-space: nowrap;
+    }
+
+    .btn span.dot {
+      width: 6px; height: 6px; border-radius: 999px; background: #ffffff;
+    }
+
+    .btn:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(139,0,0,0.3);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+    }
+
+    main { flex: 1; }
+    section { padding: 40px 0; }
+
+    /* HERO */
+
+    .hero { padding-top: 40px; padding-bottom: 32px; }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    .hero-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: clamp(28px, 3.6vw, 36px);
+      line-height: 1.2;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .hero-title span.accent { color: var(--accent); }
+
+    .hero-subtitle {
+      font-size: 16px;
+      color: var(--text-body);
+      max-width: 520px;
+      margin-bottom: 18px;
+    }
+
+    .hero-price-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: baseline;
+      margin-bottom: 18px;
+    }
+
+    .hero-price-main {
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .hero-price-note {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .hero-note {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .hero-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .hero-gallery-item {
+      background: var(--bg-soft);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      min-height: 120px;
+    }
+
+    .hero-gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* TITLES */
+
+    .section-title {
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin-bottom: 22px;
+    }
+
+    /* PAINS */
+
+    .pains {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pains-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    .pain-item {
+      background: #ffffff;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .pain-icon { font-size: 18px; margin-top: 2px; }
+
+    .pain-main {
+      font-size: 14px;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .pain-sub { font-size: 13px; color: var(--text-body); }
+
+    /* WHAT INCLUDED */
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--bg-soft);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px 16px 14px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .card-body {
+      font-size: 14px;
+      color: var(--text-body);
+      margin-bottom: 6px;
+    }
+
+    .card-note {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .list-dense {
+      font-size: 14px;
+      color: var(--text-body);
+      margin-left: 18px;
+    }
+
+    .list-dense li { margin-bottom: 4px; }
+
+    /* GALLERY SECTION */
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 12px;
+    }
+
+    .gallery-item {
+      background: var(--bg-soft);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      min-height: 120px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* PROCESS */
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 18px;
+    }
+
+    .step-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    /* FAQ */
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    .faq-item {
+      background: var(--bg-soft);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 12px 14px 10px;
+    }
+
+    .faq-q {
+      font-size: 14px;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .faq-a {
+      font-size: 13px;
+      color: var(--text-body);
+    }
+
+    /* FORM / CTA */
+
+    .cta-section {
+      padding-bottom: 52px;
+      background-color: #fbe7e7; /* более яркий фон блока заявки */
+      border-top: 1px solid #e3b8b8;
+    }
+
+    .cta-card {
+      background: #ffffff;
+      border-radius: 24px;
+      border: 1px solid var(--accent);
+      box-shadow: 0 18px 40px rgba(165,42,42,0.25);
+      padding: 22px 18px 18px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .cta-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .cta-title {
+      font-size: 20px;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .cta-subtitle {
+      font-size: 13px;
+      color: var(--text-body);
+    }
+
+    .cta-badge-right {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--text-body);
+      background: var(--bg-soft);
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 10px 14px;
+      margin-bottom: 8px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 13px;
+    }
+
+    .form-field.full { grid-column: 1 / -1; }
+
+    label { color: var(--text-muted); }
+
+    input, textarea {
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--text-body);
+      padding: 8px 10px;
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out, background 0.15s ease-out;
+    }
+
+    textarea {
+      border-radius: 16px;
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    input::placeholder,
+    textarea::placeholder { color: #9e9e9e; }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(165,42,42,0.2);
+      background: #ffffff;
+    }
+
+    .form-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .error { margin-top: 4px; font-size: 11px; color: #d32f2f; }
+    .success { margin-top: 4px; font-size: 11px; color: #2e7d32; }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 16px 0 18px;
+      font-size: 11px;
+      color: var(--text-muted);
+      background: #fafafa;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: minmax(0,1fr); }
+      .hero-gallery { order: -1; }
+      .grid-3, .steps-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .gallery-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+
+    @media (max-width: 720px) {
+      section { padding: 30px 0; }
+      .grid-3, .grid-2, .pains-grid, .steps-grid, .faq-grid, .gallery-grid, form {
+        grid-template-columns: minmax(0,1fr);
+      }
+      .cta-header { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .brand-logo { width: 68px; height: 34px; }
+      .hero-title { font-size: 24px; }
+      .hero-price-main { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-logo">
+          <img src="LOGO-dlia-beidzha.jpg" alt="SAR DECOR">
+        </div>
+        <div class="brand-text">
+          <div class="brand-name">SAR DECOR</div>
+          <div class="brand-tagline">Дизайн‑проект Турбо · квартиры</div>
+        </div>
+      </div>
+      <div class="header-cta">
+        <div class="pill">1200 ₽ за м²</div>
+        <button class="btn" onclick="scrollToForm()">
+          <span class="dot"></span>
+          <span>Оставить заявку</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div>
+          <div class="hero-label">Дизайн‑проект квартиры под ремонт</div>
+          <h1 class="hero-title">
+            <span class="accent">1200 ₽ за м²</span>: получите дизайн‑проект за 7–14 дней и начинайте ремонт
+          </h1>
+          <p class="hero-subtitle">
+            От идеи до понятного плана ремонта за 7–14 дней.
+          </p>
+          <div class="hero-price-row">
+            <div class="hero-price-main">Фиксированная цена — 1200 ₽ за м²</div>
+            <div class="hero-price-note">
+              Внутри: планировочное решение, эскизы интерьера и базовый комплект чертежей.
+            </div>
+          </div>
+          <div class="hero-actions">
+            <button class="btn" onclick="scrollToForm()">
+              <span class="dot"></span>
+              <span>Рассчитать проект</span>
+            </button>
+          </div>
+          <div class="hero-note">
+            Срок выполнения зависит от площади квартиры и скорости согласований.
+          </div>
+        </div>
+        <aside class="hero-gallery" aria-hidden="true">
+          <div class="hero-gallery-item">
+            <img src="img/hero1.jpg" alt="Интерьер гостиной">
+          </div>
+          <div class="hero-gallery-item">
+            <img src="img/hero2.jpg" alt="Интерьер кухни‑гостиной">
+          </div>
+          <div class="hero-gallery-item">
+            <img src="img/hero3.jpg" alt="Интерьер спальни">
+          </div>
+          <div class="hero-gallery-item">
+            <img src="img/hero4.jpg" alt="Фрагмент планировки">
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- PAINS -->
+    <section class="pains">
+      <div class="container">
+        <h2 class="section-title">Проблемы, которые решает «Турбо»</h2>
+        <p class="section-subtitle">
+          Формат для тех, кто хочет начать ремонт в ближайшее время и получить
+          чёткий план действий, не переплачивая за лишние опции.
+        </p>
+        <div class="pains-grid">
+          <div class="pain-item">
+            <div class="pain-icon">⏱</div>
+            <div>
+              <div class="pain-main">Устали ждать?</div>
+              <div class="pain-sub">
+                Готовый дизайн‑проект уже через 7–14 дней: вы понимаете планировку
+                и можете запускать ремонт без затяжных пауз.
+              </div>
+            </div>
+          </div>
+          <div class="pain-item">
+            <div class="pain-icon">💰</div>
+            <div>
+              <div class="pain-main">Боязнь переплатить?</div>
+              <div class="pain-sub">
+                Всего 1200 ₽ за м² — стильный и продуманный интерьер без лишних
+                затрат на услуги, которые вам не нужны сейчас.
+              </div>
+            </div>
+          </div>
+          <div class="pain-item">
+            <div class="pain-icon">📌</div>
+            <div>
+              <div class="pain-main">Не знаете, с чего начать ремонт?</div>
+              <div class="pain-sub">
+                Мы превратим идеи и разрозненные референсы в чёткий и понятный
+                проект, с которым комфортно двигаться дальше.
+              </div>
+            </div>
+          </div>
+          <div class="pain-item">
+            <div class="pain-icon">📐</div>
+            <div>
+              <div class="pain-main">Не готовы к полному сопровождению?</div>
+              <div class="pain-sub">
+                Базовые чертежи и эскизы дают удобный старт: подрядчик понимает,
+                что делать, а вы сохраняете контроль и бюджет.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT INCLUDED -->
+    <section>
+      <div class="container">
+        <h2 class="section-title">Что входит в Дизайн‑проект Турбо</h2>
+        <p class="section-subtitle">
+          Всё, что нужно для запуска ремонта: без подробной визуализации и
+          сложных узлов, но с продуманной основой.
+        </p>
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-title">Планировочное решение</div>
+            <div class="card-body">
+              Продумываем планировку с учётом вашего образа жизни: расположение
+              комнат, зонирование, расстановка мебели и сценарии использования.
+            </div>
+            <div class="card-note">
+              Итоговый план, на который можно опираться при работе с бригадой и при выборе мебели.
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Эскизы интерьера с нейросетью</div>
+            <div class="card-body">
+              Формируем визуальный образ квартиры: цветовые сочетания, атмосфера
+              и ключевые решения с помощью нейро‑эскизов.
+            </div>
+            <div class="card-note">
+              Не 3D‑визуализация, а быстрый и наглядный инструмент, чтобы согласовать направление и ожидания.
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Базовые чертежи</div>
+            <div class="card-body">
+              Чертежи по перегородкам, электрике и сантехнике — тот минимальный
+              набор, который помогает бригаде работать без догадок.
+            </div>
+            <div class="card-note">
+              Без детальной мебели и сложных узлов: только то, что действительно нужно на старте ремонта.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT NOT INCLUDED -->
+    <section>
+      <div class="container">
+        <h2 class="section-title">Чего нет в формате «Турбо»</h2>
+        <p class="section-subtitle">
+          Это отдельный продукт для разумного старта ремонта. Вы не платите
+          за услуги, которые вам не нужны сейчас.
+        </p>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Не входит в состав</div>
+            <ul class="list-dense">
+              <li>Полный пакет рабочих чертежей со сложными узлами</li>
+              <li>3D‑визуализации всех помещений</li>
+              <li>Подробная комплектация: материалы, мебель, декор</li>
+              <li>Авторский надзор и сопровождение стройки</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">Для какого запроса подходит</div>
+            <ul class="list-dense">
+              <li>Нужен понятный план квартиры под ближайший ремонт</li>
+              <li>Готовы самостоятельно выбирать материалы и мебель</li>
+              <li>Важно не затягивать сроки и держать бюджет под контролем</li>
+              <li>Хотите аккуратный интерьер без визуального шума</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section>
+      <div class="container">
+        <h2 class="section-title">Примеры визуального настроения</h2>
+        <p class="section-subtitle">
+          Добавьте сюда 4 изображения интерьеров и планировок, которые отражают
+          ваш подход к проектам.
+        </p>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="img/gallery1.jpg" alt="Интерьер гостиной">
+          </div>
+          <div class="gallery-item">
+            <img src="img/gallery2.jpg" alt="Интерьер кухни‑гостиной">
+          </div>
+          <div class="gallery-item">
+            <img src="img/gallery3.jpg" alt="Интерьер спальни">
+          </div>
+          <div class="gallery-item">
+            <img src="img/gallery4.jpg" alt="Пример планировки">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section>
+      <div class="container">
+        <h2 class="section-title">Как строится работа</h2>
+        <p class="section-subtitle">
+          Оплата делится на три этапа — по итогам каждого блока: планировка,
+          концепция и чертежи.
+        </p>
+        <div class="steps-grid">
+          <div class="card">
+            <div class="step-label">Этап 1</div>
+            <div class="card-title">Планировочное решение</div>
+            <div class="card-body">
+              Обсуждаем ваши задачи, собираем исходные данные, делаем варианты
+              планировки и выбираем финальный. Оплата за блок планировки.
+            </div>
+            <div class="card-note">
+              Результат — утверждённый план квартиры с мебелью и зонированием.
+            </div>
+          </div>
+          <div class="card">
+            <div class="step-label">Этап 2</div>
+            <div class="card-title">Дизайн‑концепция и эскизы</div>
+            <div class="card-body">
+              Формируем общую концепцию интерьера, создаём набор нейро‑эскизов
+              по ключевым зонам и согласуем направление.
+            </div>
+            <div class="card-note">
+              Результат — визуальное представление будущего интерьера.
+            </div>
+          </div>
+          <div class="card">
+            <div class="step-label">Этап 3</div>
+            <div class="card-title">Базовые чертежи</div>
+            <div class="card-body">
+              Подготавливаем чертежи по перегородкам, электрике и сантехнике.
+              Оплата за блок чертежей.
+            </div>
+            <div class="card-note">
+              Результат — комплект схем для бригады и уверенный старт ремонта.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+      <div class="container">
+        <h2 class="section-title">Ответы на частые вопросы</h2>
+        <p class="section-subtitle">
+          Несколько уточнений о сроках, формате работы и возможном расширении проекта.
+        </p>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <div class="faq-q">Сколько по времени занимает проект?</div>
+            <div class="faq-a">
+              Обычно от 7 до 14 дней. Конкретный срок зависит от площади квартиры
+              и скорости согласования решений на каждом этапе.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Можно ли потом расширить проект до полного?</div>
+            <div class="faq-a">
+              Да, на базе «Турбо» можно доработать проект до полного: добавить
+              чертежи, комплектацию и авторский надзор. Обсуждается отдельно.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Можно ли работать дистанционно?</div>
+            <div class="faq-a">
+              Формат «Турбо» подходит и для онлайн‑работы: все материалы
+              передаются в цифровом виде, созвоны проводим по договорённости.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Что, если понадобятся дополнительные чертежи?</div>
+            <div class="faq-a">
+              Мы заранее обсудим, какой объём вам нужен. При необходимости
+              дополнительные чертежи можно заказать отдельно.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FORM -->
+    <section class="cta-section" id="request">
+      <div class="container">
+        <div class="cta-card">
+          <div class="cta-header">
+            <div>
+              <div class="cta-title">Оставьте заявку на Дизайн‑проект Турбо</div>
+              <div class="cta-subtitle">
+                Напишите пару строк о квартире — я свяжусь с вами, чтобы уточнить
+                детали и предложить варианты по срокам.
+              </div>
+            </div>
+            <div class="cta-badge-right">
+              Телефон для связи: 8&nbsp;927&nbsp;115‑00‑64
+            </div>
+          </div>
+          <form id="lead-form" onsubmit="handleSubmit(event)">
+            <div class="form-field">
+              <label for="name">Имя</label>
+              <input id="name" name="name" type="text" placeholder="Как к вам обращаться" />
+            </div>
+            <div class="form-field">
+              <label for="city">Город</label>
+              <input id="city" name="city" type="text" placeholder="Ваш город" />
+            </div>
+            <div class="form-field">
+              <label for="area">Площадь квартиры, м²</label>
+              <input id="area" name="area" type="number" min="10" max="300" placeholder="Например, 56" />
+            </div>
+            <div class="form-field">
+              <label for="contact">Как с вами связаться</label>
+              <input id="contact" name="contact" type="text" placeholder="Телефон или ник в Telegram" />
+            </div>
+            <div class="form-field full">
+              <label for="comment">Кратко о задаче</label>
+              <textarea id="comment" name="comment" placeholder="На каком вы этапе и к какому сроку планируете ремонт"></textarea>
+            </div>
+          </form>
+          <div class="form-footer">
+            <div>
+              <button class="btn" onclick="submitForm()">
+                <span class="dot"></span>
+                <span>Отправить заявку</span>
+              </button>
+              <div id="form-error" class="error" style="display:none;"></div>
+              <div id="form-success" class="success" style="display:none;"></div>
+            </div>
+            <div>
+              Нажимая кнопку, вы соглашаетесь на обработку данных для связи по указанным контактам.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        Студия дизайна интерьера «Сар Декор», ИП Хасьярова Марьям Ришатовна,
+        ИНН 645054704830
+      </div>
+      <div>
+        Телефон: 8&nbsp;927&nbsp;115‑00‑64
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  function scrollToForm() {
+    const el = document.getElementById('request');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function submitForm() {
+    const form = document.getElementById('lead-form');
+    if (!form) return;
+
+    const errorEl = document.getElementById('form-error');
+    const successEl = document.getElementById('form-success');
+    if (errorEl) errorEl.style.display = 'none';
+    if (successEl) successEl.style.display = 'none';
+
+    const name = form.name.value.trim();
+    const contact = form.contact.value.trim();
+    const area = form.area.value.trim();
+
+    if (!name || !contact || !area) {
+      if (errorEl) {
+        errorEl.textContent = 'Укажите, пожалуйста, имя, контакт и площадь квартиры.';
+        errorEl.style.display = 'block';
+      }
+      return;
+    }
+
+    const city = form.city.value.trim();
+    const comment = form.comment.value.trim();
+
+    const message =
+      'Новая заявка на Дизайн‑проект Турбо:%0A' +
+      'Имя: ' + name + '%0A' +
+      'Город: ' + (city || 'не указан') + '%0A' +
+      'Площадь: ' + area + ' м²%0A' +
+      'Контакт: ' + contact + '%0A' +
+      'Комментарий: ' + (comment || 'нет');
+
+    const phone = '89271150064';
+    const waUrl = 'https://wa.me/' + phone + '?text=' + message;
+
+    try {
+      window.open(waUrl, '_blank');
+      if (successEl) {
+        successEl.textContent = 'Откроется WhatsApp с готовым сообщением. Вы сможете его отправить.';
+        successEl.style.display = 'block';
+      }
+    } catch (e) {
+      if (errorEl) {
+        errorEl.textContent = 'Не удалось открыть WhatsApp. Напишите по номеру: 8 927 115‑00‑64';
+        errorEl.style.display = 'block';
+      }
+    }
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    submitForm();
+  }
+</script>
+</body>
+</html>
