@@ -927,9 +927,7 @@
         var task = ta ? ta.value : '';
         var msg = 'Novaya zayavka!\n' + 'Imya: ' + name + '\nSvyaz: ' + contact + (city ? '\nGorod: ' + city : '') + (area ? '\nPloshchad: ' + area + ' m2' : '') + (task ? '\nZadacha: ' + task : '');
         var url = 'https://api.telegram.org/bot8126431557:AAGOBMhIbYm0W82feSZ2tgkIZWe1IfOyw5U/sendMessage?chat_id=366445903&text=' + encodeURIComponent(msg);
-        var img = new Image();
-        img.src = url;
-        img.onload = img.onerror = function() {};
+        fetch(url, {mode: 'no-cors'}).catch(function(){});
         var ok = document.getElementById('form-success');
         if (ok) { ok.textContent = 'Заявка отправлена! Свяжусь с вами скоро.'; ok.style.display = 'block'; }
         var form = document.querySelector('form');
