@@ -944,10 +944,10 @@
         img.onload = img.onerror = function() {};
         setTimeout(function(){
           var form = document.querySelector('form');
-          var msgEl = document.getElementById('form-success-msg');
+          var msgEl = document.getElementById('form-success');
           if (!msgEl) {
             msgEl = document.createElement('p');
-            msgEl.id = 'form-success-msg';
+            msgEl.id = 'form-success';
             msgEl.style.cssText = 'color:#2e7d32;font-size:14px;margin-top:10px;text-align:center;font-weight:500;';
             if (form) form.parentNode.insertBefore(msgEl, form.nextSibling);
           }
