@@ -918,47 +918,36 @@
     var el = document.getElementById('request');
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-  function submitForm() {
-    var form = document.getElementById('lead-form');
-    if (!form) return;
-    var errorEl = document.getElementById('form-error');
-    var successEl = document.getElementById('form-success');
-    if (errorEl) errorEl.style.display = 'none';
-    if (successEl) successEl.style.display = 'none';
-    var name = form.name.value.trim();
-    var contact = form.contact.value.trim();
-    var area = form.area.value.trim();
-    if (!name || !contact || !area) {
-      if (errorEl) { errorEl.textContent = 'Укажите имя, контакт и площадь.'; errorEl.style.display = 'block'; }
-      return;
-    }
-    var city = form.city.value.trim();
-    var comment = form.comment.value.trim();
-    var msg = 'Новая заявка SAR DECOR Турбо
-Имя: ' + encodeURIComponent(name) + '
-Город: ' + encodeURIComponent(city||'не указан') + '
-Площадь: ' + area + ' m2%0AКонтакт: ' + encodeURIComponent(contact) + '
-Коммент: ' + encodeURIComponent(comment||'нет');
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET','https://api.telegram.org/bot8126431557:AAGOBMhIbYm0W82feSZ2tgkIZWe1IfOyw5U/sendMessage?chat_id=366445903&text='+encodeURIComponent(msg),true);
-    xhr.onload = function(){
-      try{
-        var r = JSON.parse(xhr.responseText);
-        if(r.ok){
+      function submitForm() {
+        var name = document.getElementById('name').value.trim();
+        var phone = document.getElementById('phone').value.trim();
+        var comment = document.getElementById('comment') ? document.getElementById('comment').value.trim() : '';
+        var area = document.getElementById('area') ? document.getElementById('area').value.trim() : '';
+        var successEl = document.getElementById('success-msg');
+        var errorEl = document.getElementById('error-msg');
+        if(successEl) successEl.style.display='none';
+        if(errorEl) errorEl.style.display='none';
+        var msg = '❤️ Новая заявка!
+'
+          + 'Имя: ' + name + '
+'
+          + 'Телефон: ' + phone
+          + (area ? '
+Площадь: ' + area + ' м²' : '')
+          + (comment ? '
+Коммент: ' + comment : '');
+        var token = '8126431557:AAGOBMhIbYm0W82feSZ2tgkIZWe1IfOyw5U';
+        var chatId = '366445903';
+        var url = 'https://api.telegram.org/bot' + token + '/sendMessage?chat_id=' + chatId + '&text=' + encodeURIComponent(msg);
+        var img = new Image();
+        img.src = url;
+        img.onload = img.onerror = function() {};
+        setTimeout(function(){
           if(successEl){successEl.textContent='Заявка отправлена! Свяжусь с вами в ближайшее время.';successEl.style.display='block';}
-          form.reset();
-        } else {
-          if(errorEl){errorEl.textContent='Ошибка. Напишите напрямую: 8 927 115-00-64';errorEl.style.display='block';}
-        }
-      }catch(e){
-        if(errorEl){errorEl.textContent='Ошибка. Напишите напрямую: 8 927 115-00-64';errorEl.style.display='block';}
+          var form = document.getElementById('contact-form') || document.querySelector('form');
+          if(form) form.reset();
+        }, 1500);
       }
-    };
-    xhr.onerror=function(){
-      if(errorEl){errorEl.textContent='Ошибка. Напишите напрямую: 8 927 115-00-64';errorEl.style.display='block';}
-    };
-    xhr.send();
-  }
   function handleSubmit(e){
     e.preventDefault();
     submitForm();
