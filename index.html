@@ -918,14 +918,14 @@
     var el = document.getElementById('request');
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-      function submitForm() {
-        var name = document.getElementById('name') ? document.getElementById('name').value.trim() : '';
-        var contact = document.getElementById('contact') ? document.getElementById('contact').value.trim() : '';
-        var city = document.getElementById('city') ? document.getElementById('city').value.trim() : '';
-        var area = document.getElementById('area') ? document.getElementById('area').value.trim() : '';
-        var taskEl = document.querySelector('textarea');
-        var task = taskEl ? taskEl.value.trim() : '';
-        var msg = '❤️ Новая заявка!
+            function submitForm() {
+        var name = (document.getElementById('name') || {}).value || '';
+        var contact = (document.getElementById('contact') || {}).value || '';
+        var city = (document.getElementById('city') || {}).value || '';
+        var area = (document.getElementById('area') || {}).value || '';
+        var ta = document.querySelector('textarea');
+        var task = ta ? ta.value : '';
+        var msg = 'Новая заявка!
 '
           + 'Имя: ' + name + '
 '
@@ -933,28 +933,17 @@
           + (city ? '
 Город: ' + city : '')
           + (area ? '
-Площадь: ' + area + ' м²' : '')
+Площадь: ' + area + ' м2' : '')
           + (task ? '
 Задача: ' + task : '');
-        var token = '8126431557:AAGOBMhIbYm0W82feSZ2tgkIZWe1IfOyw5U';
-        var chatId = '366445903';
-        var url = 'https://api.telegram.org/bot' + token + '/sendMessage?chat_id=' + chatId + '&text=' + encodeURIComponent(msg);
+        var url = 'https://api.telegram.org/bot8126431557:AAGOBMhIbYm0W82feSZ2tgkIZWe1IfOyw5U/sendMessage?chat_id=366445903&text=' + encodeURIComponent(msg);
         var img = new Image();
         img.src = url;
         img.onload = img.onerror = function() {};
-        setTimeout(function(){
-          var form = document.querySelector('form');
-          var msgEl = document.getElementById('form-success');
-          if (!msgEl) {
-            msgEl = document.createElement('p');
-            msgEl.id = 'form-success';
-            msgEl.style.cssText = 'color:#2e7d32;font-size:14px;margin-top:10px;text-align:center;font-weight:500;';
-            if (form) form.parentNode.insertBefore(msgEl, form.nextSibling);
-          }
-          msgEl.textContent = 'Заявка отправлена! Свяжусь с вами в ближайшее время.';
-          msgEl.style.display = 'block';
-          if (form) form.reset();
-        }, 1500);
+        var ok = document.getElementById('form-success');
+        if (ok) { ok.textContent = 'Заявка отправлена! Свяжусь с вами скоро.'; ok.style.display = 'block'; }
+        var form = document.querySelector('form');
+        if (form) form.reset();
       }
   function handleSubmit(e){
     e.preventDefault();
