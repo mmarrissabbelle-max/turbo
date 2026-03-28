@@ -914,7 +914,7 @@
 </div>
 
 <script>
-  function scrollToForm() {
+  function scrollToForm() {     var el = document.getElementById('request');     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });   }    function submitForm() {     var form = document.getElementById('lead-form');     if (!form) return;     var errorEl = document.getElementById('form-error');     var successEl = document.getElementById('form-success');     if (errorEl) errorEl.style.display = 'none';     if (successEl) successEl.style.display = 'none';     var name = form.name.value.trim();     var contact = form.contact.value.trim();     var area = form.area.value.trim();     if (!name || !contact || !area) {       if (errorEl) { errorEl.textContent = 'Укажите, пожалуйста, имя, контакт и площадь квартиры.'; errorEl.style.display = 'block'; }       return;     }     var city = form.city.value.trim();     var comment = form.comment.value.trim();     var msg = 'Новая заявка SAR DECOR Турбо%0A'       + 'Имя: ' + encodeURIComponent(name) + '%0A'       + 'Город: ' + encodeURIComponent(city || 'не указан') + '%0A'       + 'Площадь: ' + area + ' m2%0A'       + 'Контакт: ' + encodeURIComponent(contact) + '%0A'       + 'Комментарий: ' + encodeURIComponent(comment || 'нет');     var xhr = new XMLHttpRequest();     xhr.open('GET', 'https://api.telegram.org/bot8126431557:AAGOBMhIbYm0W82feSZ2tgkIZWe1IfOyw5U/sendMessage?chat_id=366445903&text=' + msg, true);     xhr.onload = function() {       try {         var resp = JSON.parse(xhr.responseText);         if (resp.ok) {           if (successEl) { successEl.textContent = 'Заявка отправлена! Я свяжусь с вами в ближайшее время.'; successEl.style.display = 'block'; }           form.reset();         } else {           if (errorEl) { errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; }         }       } catch(e) {         if (errorEl) { errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; }       }     };     xhr.onerror = function() {       if (errorEl) { errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; }     };     xhr.send();   }    function handleSubmit(e) {     e.preventDefault();     submitForm();
     const el = document.getElementById('request');
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
@@ -940,10 +940,10 @@
       return;
     }
 
-    const city = form.city.value.trim();
+    var city = form.city.value.trim();     var comment = form.comment.value.trim();     var msg = 'Новая заявка SAR DECOR Турбо%0A'       + 'Имя: ' + encodeURIComponent(name) + '%0A'       + 'Город: ' + encodeURIComponent(city || 'не указан') + '%0A'       + 'Площадь: ' + area + ' m2%0A'       + 'Контакт: ' + encodeURIComponent(contact) + '%0A'       + 'Комментарий: ' + encodeURIComponent(comment || 'нет');     var xhr = new XMLHttpRequest();     xhr.open('GET', 'https://api.telegram.org/bot8126431557:AAGOBMhIbYm0W82feSZ2tgkIZWe1IfOyw5U/sendMessage?chat_id=366445903&text=' + msg, true);     xhr.onload = function() {       try {         var resp = JSON.parse(xhr.responseText);         if (resp.ok) {           if (successEl) { successEl.textContent = 'Заявка отправлена! Я свяжусь с вами в ближайшее время.'; successEl.style.display = 'block'; }           form.reset();         } else {           if (errorEl) { errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; }         }       } catch(e) {         if (errorEl) { errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; }       }     };     xhr.onerror = function() {       if (errorEl) { errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; }     };     xhr.send();   
     const comment = form.comment.value.trim();
 
-    const message =
+ 
       'Новая заявка на Дизайн‑проект Турбо: ' +
       'Имя: ' + name + ' ' +
       'Город: ' + (city || 'не указан') + ' ' +
