@@ -914,61 +914,48 @@
 </div>
 
 <script>
-  function scrollToForm() {     var el = document.getElementById('request');     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });   }    function submitForm() {     var form = document.getElementById('lead-form');     if (!form) return;     var errorEl = document.getElementById('form-error');     var successEl = document.getElementById('form-success');     if (errorEl) errorEl.style.display = 'none';     if (successEl) successEl.style.display = 'none';     var name = form.name.value.trim();     var contact = form.contact.value.trim();     var area = form.area.value.trim();     if (!name || !contact || !area) {       if (errorEl) { errorEl.textContent = 'Укажите, пожалуйста, имя, контакт и площадь квартиры.'; errorEl.style.display = 'block'; }       return;     }     var city = form.city.value.trim();     var comment = form.comment.value.trim();     var msg = 'Новая заявка SAR DECOR Турбо%0A'       + 'Имя: ' + encodeURIComponent(name) + '%0A'       + 'Город: ' + encodeURIComponent(city || 'не указан') + '%0A'       + 'Площадь: ' + area + ' m2%0A'       + 'Контакт: ' + encodeURIComponent(contact) + '%0A'       + 'Комментарий: ' + encodeURIComponent(comment || 'нет');     var xhr = new XMLHttpRequest();     xhr.open('GET', 'https://api.telegram.org/bot8126431557:AAGOBMhIbYm0W82feSZ2tgkIZWe1IfOyw5U/sendMessage?chat_id=366445903&text=' + msg, true);     xhr.onload = function() {       try {         var resp = JSON.parse(xhr.responseText);         if (resp.ok) {           if (successEl) { successEl.textContent = 'Заявка отправлена! Я свяжусь с вами в ближайшее время.'; successEl.style.display = 'block'; }           form.reset();         } else {           if (errorEl) { errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; }         }       } catch(e) {         if (errorEl) { errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; }       }     };     xhr.onerror = function() {       if (errorEl) { errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; }     };     xhr.send();   }    function handleSubmit(e) {     e.preventDefault();     submitForm();
-    const el = document.getElementById('request');
+  function scrollToForm() {
+    var el = document.getElementById('request');
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-
   function submitForm() {
-    const form = document.getElementById('lead-form');
+    var form = document.getElementById('lead-form');
     if (!form) return;
-
-    const errorEl = document.getElementById('form-error');
-    const successEl = document.getElementById('form-success');
+    var errorEl = document.getElementById('form-error');
+    var successEl = document.getElementById('form-success');
     if (errorEl) errorEl.style.display = 'none';
     if (successEl) successEl.style.display = 'none';
-
-    const name = form.name.value.trim();
-    const contact = form.contact.value.trim();
-    const area = form.area.value.trim();
-
+    var name = form.name.value.trim();
+    var contact = form.contact.value.trim();
+    var area = form.area.value.trim();
     if (!name || !contact || !area) {
-      if (errorEl) {
-        errorEl.textContent = 'Укажите, пожалуйста, имя, контакт и площадь квартиры.';
-        errorEl.style.display = 'block';
-      }
+      if (errorEl) { errorEl.textContent = 'Укажите имя, контакт и площадь.'; errorEl.style.display = 'block'; }
       return;
     }
-
-    var city = form.city.value.trim();     var comment = form.comment.value.trim();     var msg = 'Новая заявка SAR DECOR Турбо%0A'       + 'Имя: ' + encodeURIComponent(name) + '%0A'       + 'Город: ' + encodeURIComponent(city || 'не указан') + '%0A'       + 'Площадь: ' + area + ' m2%0A'       + 'Контакт: ' + encodeURIComponent(contact) + '%0A'       + 'Комментарий: ' + encodeURIComponent(comment || 'нет');     var xhr = new XMLHttpRequest();     xhr.open('GET', 'https://api.telegram.org/bot8126431557:AAGOBMhIbYm0W82feSZ2tgkIZWe1IfOyw5U/sendMessage?chat_id=366445903&text=' + msg, true);     xhr.onload = function() {       try {         var resp = JSON.parse(xhr.responseText);         if (resp.ok) {           if (successEl) { successEl.textContent = 'Заявка отправлена! Я свяжусь с вами в ближайшее время.'; successEl.style.display = 'block'; }           form.reset();         } else {           if (errorEl) { errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; }         }       } catch(e) {         if (errorEl) { errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; }       }     };     xhr.onerror = function() {       if (errorEl) { errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; }     };     xhr.send();   
-    const comment = form.comment.value.trim();
-
- 
-      'Новая заявка на Дизайн‑проект Турбо: ' +
-      'Имя: ' + name + ' ' +
-      'Город: ' + (city || 'не указан') + ' ' +
-      'Площадь: ' + area + ' м² ' +
-      'Контакт: ' + contact + ' ' +
-      'Комментарий: ' + (comment || 'нет');
-
-    const tgToken = '8126431557:AAGOBMhIbYm0W82feSZ2tgkIZWe1IfOyw5U';     const tgChat = '366445903';
-    const tgUrl = 'https://api.telegram.org/bot' + tgToken + '/sendMessage';
-
- 
-      fetch(tgUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chat_id: tgChat, text: message, parse_mode: 'HTML' }) }).then(function(r){ return r.json(); }).then(function(data){ if(data.ok){ if(successEl){ successEl.textContent = 'Заявка отправлена! Я свяжусь с вами в ближайшее время.'; successEl.style.display = 'block'; } if(form) form.reset(); } else { if(errorEl){ errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; } } }).catch(function(){ if(errorEl){ errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; } }); 
-      if (successEl) {
-        successEl.textContent = 'Заявка отправлена! Я свяжусь с вами в ближайшее время.';
-        successEl.style.display = 'block';
+    var city = form.city.value.trim();
+    var comment = form.comment.value.trim();
+    var msg = 'Новая заявка SAR DECOR Турбо%0AИмя: ' + encodeURIComponent(name) + '%0AГород: ' + encodeURIComponent(city||'не указан') + '%0AПлощадь: ' + area + ' m2%0AКонтакт: ' + encodeURIComponent(contact) + '%0AКоммент: ' + encodeURIComponent(comment||'нет');
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET','https://api.telegram.org/bot8126431557:AAGOBMhIbYm0W82feSZ2tgkIZWe1IfOyw5U/sendMessage?chat_id=366445903&text='+msg,true);
+    xhr.onload = function(){
+      try{
+        var r = JSON.parse(xhr.responseText);
+        if(r.ok){
+          if(successEl){successEl.textContent='Заявка отправлена! Свяжусь с вами в ближайшее время.';successEl.style.display='block';}
+          form.reset();
+        } else {
+          if(errorEl){errorEl.textContent='Ошибка. Напишите напрямую: 8 927 115-00-64';errorEl.style.display='block';}
+        }
+      }catch(e){
+        if(errorEl){errorEl.textContent='Ошибка. Напишите напрямую: 8 927 115-00-64';errorEl.style.display='block';}
       }
- 
-      if (errorEl) {
-        errorEl.textContent = 'Не удалось открыть WhatsApp. Напишите по номеру: 8 927 115‑00‑64';
-        errorEl.style.display = 'block';
-      }
-    }
+    };
+    xhr.onerror=function(){
+      if(errorEl){errorEl.textContent='Ошибка. Напишите напрямую: 8 927 115-00-64';errorEl.style.display='block';}
+    };
+    xhr.send();
   }
-
-  function handleSubmit(e) {
+  function handleSubmit(e){
     e.preventDefault();
     submitForm();
   }
