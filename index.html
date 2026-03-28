@@ -944,23 +944,23 @@
     const comment = form.comment.value.trim();
 
     const message =
-      'Новая заявка на Дизайн‑проект Турбо:%0A' +
-      'Имя: ' + name + '%0A' +
-      'Город: ' + (city || 'не указан') + '%0A' +
-      'Площадь: ' + area + ' м²%0A' +
-      'Контакт: ' + contact + '%0A' +
+      'Новая заявка на Дизайн‑проект Турбо: ' +
+      'Имя: ' + name + ' ' +
+      'Город: ' + (city || 'не указан') + ' ' +
+      'Площадь: ' + area + ' м² ' +
+      'Контакт: ' + contact + ' ' +
       'Комментарий: ' + (comment || 'нет');
 
-    const phone = '89271150064';
-    const waUrl = 'https://wa.me/' + phone + '?text=' + message;
+    const tgToken = '8126431557:AAGOBMhIbYm0W82feSZ2tgkIZWe1IfOyw5U';     const tgChat = '366445903';
+    const tgUrl = 'https://api.telegram.org/bot' + tgToken + '/sendMessage';
 
-    try {
-      window.open(waUrl, '_blank');
+ 
+      fetch(tgUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chat_id: tgChat, text: message, parse_mode: 'HTML' }) }).then(function(r){ return r.json(); }).then(function(data){ if(data.ok){ if(successEl){ successEl.textContent = 'Заявка отправлена! Я свяжусь с вами в ближайшее время.'; successEl.style.display = 'block'; } if(form) form.reset(); } else { if(errorEl){ errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; } } }).catch(function(){ if(errorEl){ errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; } }); return;
       if (successEl) {
-        successEl.textContent = 'Откроется WhatsApp с готовым сообщением. Вы сможете его отправить.';
+        successEl.textContent = 'Заявка отправлена! Я свяжусь с вами в ближайшее время.';
         successEl.style.display = 'block';
       }
-    } catch (e) {
+ 
       if (errorEl) {
         errorEl.textContent = 'Не удалось открыть WhatsApp. Напишите по номеру: 8 927 115‑00‑64';
         errorEl.style.display = 'block';
