@@ -955,7 +955,7 @@
     const tgUrl = 'https://api.telegram.org/bot' + tgToken + '/sendMessage';
 
  
-      fetch(tgUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chat_id: tgChat, text: message, parse_mode: 'HTML' }) }).then(function(r){ return r.json(); }).then(function(data){ if(data.ok){ if(successEl){ successEl.textContent = 'Заявка отправлена! Я свяжусь с вами в ближайшее время.'; successEl.style.display = 'block'; } if(form) form.reset(); } else { if(errorEl){ errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; } } }).catch(function(){ if(errorEl){ errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; } }); return;
+      fetch(tgUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ chat_id: tgChat, text: message, parse_mode: 'HTML' }) }).then(function(r){ return r.json(); }).then(function(data){ if(data.ok){ if(successEl){ successEl.textContent = 'Заявка отправлена! Я свяжусь с вами в ближайшее время.'; successEl.style.display = 'block'; } if(form) form.reset(); } else { if(errorEl){ errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; } } }).catch(function(){ if(errorEl){ errorEl.textContent = 'Ошибка отправки. Напишите напрямую: 8 927 115-00-64'; errorEl.style.display = 'block'; } }); 
       if (successEl) {
         successEl.textContent = 'Заявка отправлена! Я свяжусь с вами в ближайшее время.';
         successEl.style.display = 'block';
