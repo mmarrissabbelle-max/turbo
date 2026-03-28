@@ -936,7 +936,7 @@
     var comment = form.comment.value.trim();
     var msg = 'Новая заявка SAR DECOR Турбо%0AИмя: ' + encodeURIComponent(name) + '%0AГород: ' + encodeURIComponent(city||'не указан') + '%0AПлощадь: ' + area + ' m2%0AКонтакт: ' + encodeURIComponent(contact) + '%0AКоммент: ' + encodeURIComponent(comment||'нет');
     var xhr = new XMLHttpRequest();
-    xhr.open('GET','https://api.telegram.org/bot8126431557:AAGOBMhIbYm0W82feSZ2tgkIZWe1IfOyw5U/sendMessage?chat_id=366445903&text='+msg,true);
+    xhr.open('GET','https://api.telegram.org/bot8126431557:AAGOBMhIbYm0W82feSZ2tgkIZWe1IfOyw5U/sendMessage?chat_id=366445903&text='+encodeURIComponent(msg),true);
     xhr.onload = function(){
       try{
         var r = JSON.parse(xhr.responseText);
