@@ -919,23 +919,23 @@
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
       function submitForm() {
-        var name = document.getElementById('name').value.trim();
-        var phone = document.getElementById('phone').value.trim();
-        var comment = document.getElementById('comment') ? document.getElementById('comment').value.trim() : '';
+        var name = document.getElementById('name') ? document.getElementById('name').value.trim() : '';
+        var contact = document.getElementById('contact') ? document.getElementById('contact').value.trim() : '';
+        var city = document.getElementById('city') ? document.getElementById('city').value.trim() : '';
         var area = document.getElementById('area') ? document.getElementById('area').value.trim() : '';
-        var successEl = document.getElementById('success-msg');
-        var errorEl = document.getElementById('error-msg');
-        if(successEl) successEl.style.display='none';
-        if(errorEl) errorEl.style.display='none';
+        var taskEl = document.querySelector('textarea');
+        var task = taskEl ? taskEl.value.trim() : '';
         var msg = '❤️ Новая заявка!
 '
           + 'Имя: ' + name + '
 '
-          + 'Телефон: ' + phone
+          + 'Связь: ' + contact
+          + (city ? '
+Город: ' + city : '')
           + (area ? '
 Площадь: ' + area + ' м²' : '')
-          + (comment ? '
-Коммент: ' + comment : '');
+          + (task ? '
+Задача: ' + task : '');
         var token = '8126431557:AAGOBMhIbYm0W82feSZ2tgkIZWe1IfOyw5U';
         var chatId = '366445903';
         var url = 'https://api.telegram.org/bot' + token + '/sendMessage?chat_id=' + chatId + '&text=' + encodeURIComponent(msg);
@@ -943,9 +943,17 @@
         img.src = url;
         img.onload = img.onerror = function() {};
         setTimeout(function(){
-          if(successEl){successEl.textContent='Заявка отправлена! Свяжусь с вами в ближайшее время.';successEl.style.display='block';}
-          var form = document.getElementById('contact-form') || document.querySelector('form');
-          if(form) form.reset();
+          var form = document.querySelector('form');
+          var msgEl = document.getElementById('form-success-msg');
+          if (!msgEl) {
+            msgEl = document.createElement('p');
+            msgEl.id = 'form-success-msg';
+            msgEl.style.cssText = 'color:#2e7d32;font-size:14px;margin-top:10px;text-align:center;font-weight:500;';
+            if (form) form.parentNode.insertBefore(msgEl, form.nextSibling);
+          }
+          msgEl.textContent = 'Заявка отправлена! Свяжусь с вами в ближайшее время.';
+          msgEl.style.display = 'block';
+          if (form) form.reset();
         }, 1500);
       }
   function handleSubmit(e){
