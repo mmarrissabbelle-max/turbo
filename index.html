@@ -925,17 +925,7 @@
         var area = (document.getElementById('area') || {}).value || '';
         var ta = document.querySelector('textarea');
         var task = ta ? ta.value : '';
-        var msg = 'Новая заявка!
-'
-          + 'Имя: ' + name + '
-'
-          + 'Связь: ' + contact
-          + (city ? '
-Город: ' + city : '')
-          + (area ? '
-Площадь: ' + area + ' м2' : '')
-          + (task ? '
-Задача: ' + task : '');
+        var msg = 'Novaya zayavka!\n' + 'Imya: ' + name + '\nSvyaz: ' + contact + (city ? '\nGorod: ' + city : '') + (area ? '\nPloshchad: ' + area + ' m2' : '') + (task ? '\nZadacha: ' + task : '');
         var url = 'https://api.telegram.org/bot8126431557:AAGOBMhIbYm0W82feSZ2tgkIZWe1IfOyw5U/sendMessage?chat_id=366445903&text=' + encodeURIComponent(msg);
         var img = new Image();
         img.src = url;
