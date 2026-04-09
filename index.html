@@ -950,8 +950,19 @@
           });
       }
   function handleSubmit(e){
-    e.preventDefault();
-    submitForm();
+e.preventDefault();
+  var contactEl = document.getElementById('contact');
+  var contactVal = contactEl ? contactEl.value.trim() : '';
+  if (!contactVal) {
+    contactEl.style.borderColor = '#d32f2f';
+    contactEl.style.boxShadow = '0 0 0 2px rgba(211,47,47,0.3)';
+    var msg = document.getElementById('form-success');
+    if (msg) { msg.textContent = '⚠️ Укажите номер телефона — без него не смогу с вами связаться.'; msg.style.display = 'block'; msg.style.color = '#d32f2f'; }
+    contactEl.focus();
+    return;
+  }
+  if (contactEl) { contactEl.style.borderColor = ''; contactEl.style.boxShadow = ''; }
+  submitForm();
   }
 </script>
 </body>
